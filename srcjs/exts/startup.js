@@ -28,14 +28,17 @@ $(function() {
     if (config.mode == "auto") {
       $(document).on("shiny:idle", function(event) {
         setTimeout(function() {
-          while (startup[0]) {
-            startup[0].parentNode.removeChild(startup[0]);
-          }
+            startup[0].style.opacity = '0';
+            setTimeout(function() {
+              console.log("trigger4");
+              startup[0].parentNode.removeChild(startup[0]);
+            }, 1000)
         }, config.timeout);
       });
     }
   });
   Shiny.addCustomMessageHandler("shinybusy-remove-start-up", function(data) {
+    console.log('trigger2');
     var startup = document.getElementsByClassName("shinybusy-startup");
     setTimeout(function() {
       while (startup[0]) {
